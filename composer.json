@@ -1,0 +1,19 @@
+{
+    "name": "fize/math",
+    "description": "common mathematical calculation library, produced by FizeChan.",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "FizeChan",
+            "email": "chenfengzhan@qq.com"
+        }
+    ],
+    "require": {
+		"php": ">=7.0.0"
+	},
+	"autoload": {
+        "psr-4": {
+            "fize\\math\\": "src"
+        }
+    }
+}
