@@ -1,9 +1,10 @@
 <?php
 
-namespace app\common\library\util\math;
+namespace fize\math;
 
 /**
  * 随机生成类
+ * @package fize\math
  */
 class Random
 {
@@ -83,11 +84,14 @@ class Random
                 }
                 return substr(str_shuffle(str_repeat($pool, ceil($len / strlen($pool)))), 0, $len);
             case 'unique':
+                return uniqid(mt_rand());
             case 'md5':
-                return md5(uniqid(mt_rand()));
+                return md5(mt_rand());
             case 'encrypt':
             case 'sha1':
                 return sha1(uniqid(mt_rand(), TRUE));
+            default:
+                return uniqid();
         }
     }
 

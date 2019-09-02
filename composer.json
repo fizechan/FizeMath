@@ -9,8 +9,9 @@
         }
     ],
     "require": {
-		"php": ">=7.0.0"
-	},
+		"php": ">=7.0.0",
+        "ext-bcmath": "*"
+    },
 	"autoload": {
         "psr-4": {
             "fize\\math\\": "src"

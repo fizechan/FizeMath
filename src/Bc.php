@@ -6,6 +6,7 @@ namespace fize\math;
 /**
  * BCMath高精度数学类
  * 由于精度问题，建议参数都以字符串形式传递。
+ * @package fize\math
  */
 class Bc
 {

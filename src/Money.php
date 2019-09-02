@@ -1,8 +1,11 @@
 <?php
 
-namespace util\math;
+namespace fize\math;
 
-
+/**
+ * 金额类
+ * @package fize\math
+ */
 class Money
 {
     /**
@@ -22,7 +25,7 @@ class Money
      * @param bool $rmb 是否大写
      * @return string
      */
-    public static function upper($number = 0, $int_unit = '', $is_round = FALSE, $is_extra_zero = TRUE, $rmb = TRUE)
+    public static function upper($number, $int_unit = '', $is_round = FALSE, $is_extra_zero = TRUE, $rmb = TRUE)
     {
         // 将数字切分成两段
         $parts = explode('.', $number, 2);
@@ -44,15 +47,15 @@ class Money
 
         // 定义
         if ($rmb) {
-            $chs = array('0', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖');
-            $uni = array('', '拾', '佰', '仟');
-            $dec_uni = array('角', '分');
-            $exp = array('', '万');
+            $chs = ['0', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+            $uni = ['', '拾', '佰', '仟'];
+            $dec_uni = ['角', '分'];
+            $exp = ['', '万'];
         } else {
-            $chs = array('0', '一', '二', '三', '四', '五', '六', '七', '八', '九');
-            $uni = array('', '十', '百', '千');
-            $dec_uni = array('角', '分');
-            $exp = array('', '万');
+            $chs = ['0', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+            $uni = ['', '十', '百', '千'];
+            $dec_uni = ['角', '分'];
+            $exp = ['', '万'];
         }
 
 
