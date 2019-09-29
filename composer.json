@@ -1,6 +1,6 @@
 {
     "name": "fize/math",
-    "description": "common mathematical calculation library, produced by FizeChan.",
+    "description": "common mathematical calculation library.",
     "license": "Apache-2.0",
     "authors": [
         {
@@ -9,8 +9,7 @@
         }
     ],
     "require": {
-		"php": ">=7.0.0",
-        "ext-bcmath": "*"
+		"php": ">=7.0.0"
     },
 	"autoload": {
         "psr-4": {

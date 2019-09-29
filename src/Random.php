@@ -89,7 +89,7 @@ class Random
                 return md5(mt_rand());
             case 'encrypt':
             case 'sha1':
-                return sha1(uniqid(mt_rand(), TRUE));
+                return sha1(uniqid(mt_rand(), true));
             default:
                 return uniqid();
         }
