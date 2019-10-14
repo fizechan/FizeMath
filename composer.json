@@ -1,6 +1,6 @@
 {
     "name": "fize/math",
-    "description": "common mathematical calculation library.",
+    "description": "数学计算库.",
     "license": "Apache-2.0",
     "authors": [
         {

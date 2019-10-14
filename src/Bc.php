@@ -6,7 +6,7 @@ namespace fize\math;
 
 /**
  * BCMath高精度数学类
- * 由于精度问题，建议参数都以字符串形式传递。
+ * @notice 由于精度问题，建议参数都以字符串形式传递。
  * @package fize\math
  */
 class Bc
@@ -26,9 +26,9 @@ class Bc
      * @param int $scale 指定结果小数位，默认是自动
      * @return string
      */
-    public static function add($left_operand, $right_operand, $scale = 0)
+    public static function add($left_operand, $right_operand, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bcadd((string)$left_operand, (string)$right_operand);
         } else {
             return bcadd((string)$left_operand, (string)$right_operand, $scale);
@@ -41,7 +41,7 @@ class Bc
      * @param int $scale 指定结果小数位，默认是自动
      * @return string
      */
-    public static function adds(array $operands, $scale = 0)
+    public static function adds(array $operands, $scale = null)
     {
         $total = '0';
         foreach ($operands as $operand) {
@@ -57,9 +57,9 @@ class Bc
      * @param int $scale 设置指示数字， 在使用来作比较的小数点部分. 默认比较全部
      * @return int 如果两个数相等返回0, 左边的数left_operand比较右边的数right_operand大返回1, 否则返回-1.
      */
-    public static function comp($left_operand, $right_operand, $scale = 0)
+    public static function comp($left_operand, $right_operand, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bccomp((string)$left_operand, (string)$right_operand);
         } else {
             return bccomp((string)$left_operand, (string)$right_operand, $scale);
@@ -73,9 +73,9 @@ class Bc
      * @param int $scale 指定结果小数位，默认是自动
      * @return string 返回结果为字符串类型的结果，如果右操作数是0结果为null
      */
-    public static function div($left_operand, $right_operand, $scale = 0)
+    public static function div($left_operand, $right_operand, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bcdiv((string)$left_operand, (string)$right_operand);
         } else {
             return bcdiv((string)$left_operand, (string)$right_operand, $scale);
@@ -100,13 +100,28 @@ class Bc
      * @param int $scale 设置结果中小数点后的小数位数
      * @return string 返回计算结果字符串
      */
-    public static function mul($left_operand, $right_operand, $scale = 0)
+    public static function mul($left_operand, $right_operand, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bcmul((string)$left_operand, (string)$right_operand);
         } else {
             return bcmul((string)$left_operand, (string)$right_operand, $scale);
         }
+    }
+
+    /**
+     * 多个任意精度数字的乘法法计算，返回字符串结果
+     * @param array $operands 要累乘的数值组成的驻足
+     * @param int $scale 指定结果小数位，默认是自动
+     * @return string
+     */
+    public static function muls(array $operands, $scale = null)
+    {
+        $muls = '1';
+        foreach ($operands as $operand) {
+            $muls = self::mul($muls, $operand, $scale);
+        }
+        return $muls;
     }
 
     /**
@@ -116,9 +131,9 @@ class Bc
      * @param int $scale 设置结果中小数点后的小数位数
      * @return string
      */
-    public static function pow($left_operand, $right_operand, $scale = 0)
+    public static function pow($left_operand, $right_operand, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bcpow((string)$left_operand, (string)$right_operand);
         } else {
             return bcpow((string)$left_operand, (string)$right_operand, $scale);
@@ -133,9 +148,9 @@ class Bc
      * @param int $scale 设置结果中小数点后的小数位数
      * @return string
      */
-    public static function powmod($left_operand, $right_operand, $modulus, $scale = 0)
+    public static function powmod($left_operand, $right_operand, $modulus, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bcpowmod((string)$left_operand, (string)$right_operand, (string)$modulus);
         } else {
             return bcpowmod((string)$left_operand, (string)$right_operand, (string)$modulus, $scale);
@@ -158,9 +173,9 @@ class Bc
      * @param int $scale 设置结果中小数点后的小数位数
      * @return string
      */
-    public static function sqrt($operand, $scale = 0)
+    public static function sqrt($operand, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bcsqrt((string)$operand);
         } else {
             return bcsqrt((string)$operand, $scale);
@@ -174,9 +189,9 @@ class Bc
      * @param int $scale 设置结果中小数点后的小数位数
      * @return string
      */
-    public static function sub($left_operand, $right_operand, $scale = 0)
+    public static function sub($left_operand, $right_operand, $scale = null)
     {
-        if ($scale == 0) {
+        if (is_null($scale)) {
             return bcsub((string)$left_operand, (string)$right_operand);
         } else {
             return bcsub((string)$left_operand, (string)$right_operand, $scale);
