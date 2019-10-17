@@ -1,6 +1,6 @@
 {
     "name": "fize/math",
-    "description": "数学计算库.",
+    "description": "数学计算库",
     "license": "Apache-2.0",
     "authors": [
         {
@@ -9,10 +9,14 @@
         }
     ],
     "require": {
-		"php": ">=5.4.0"
+		"php": ">=7.0.0"
     },
 	"require-dev": {
         "phpunit/phpunit": "^8.0.0"
+    },
+    "suggest": {
+        "ext-bcmath": "*",
+        "ext-gmp": "*"
     },
 	"autoload": {
         "psr-4": {
