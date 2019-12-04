@@ -4,7 +4,6 @@ namespace fize\math;
 
 /**
  * 金额类
- * @package fize\math
  */
 class Money
 {

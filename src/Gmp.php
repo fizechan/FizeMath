@@ -9,7 +9,6 @@ use GMP as GP;
 
 /**
  * GMP数学扩展
- * @package fize\math
  */
 class Gmp
 {
@@ -182,7 +181,9 @@ class Gmp
     }
 
     /**
-     * 计算g, s, t，使得a*s + b*t =g =gcd(a,b)其中gcd是最大公约数。返回各自元素g、s和t的数组。
+     * 计算g, s, t，使得a*s + b*t =g =gcd(a,b)。
+     *
+     * 其中gcd是最大公约数。返回各自元素g、s和t的数组。
      * @param $a
      * @param $b
      * @return array

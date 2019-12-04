@@ -3,15 +3,13 @@
 namespace fize\math;
 
 /**
- * 随机生成类
- * @package fize\math
+ * 随机数生成类
  */
 class Random
 {
 
     /**
      * 生成数字和字母
-     *
      * @param int $len 长度
      * @return string
      */
@@ -22,7 +20,6 @@ class Random
 
     /**
      * 仅生成字符
-     *
      * @param int $len 长度
      * @return string
      */
@@ -33,7 +30,6 @@ class Random
 
     /**
      * 生成指定长度的随机数字
-     *
      * @param int $len 长度
      * @return string
      */
@@ -44,7 +40,6 @@ class Random
 
     /**
      * 数字和字母组合的随机字符串
-     *
      * @param int $len 长度
      * @return string
      */
@@ -54,12 +49,42 @@ class Random
     }
 
     /**
+     * 基于以微秒计的当前时间，生成一个唯一的 ID
+     * @return string
+     */
+    public static function uniqid()
+    {
+        return self::build('uniqid');
+    }
+
+    /**
+     * 生成一个唯一的 MD5 值
+     * @return string
+     */
+    public static function md5()
+    {
+        return self::build('md5');
+    }
+
+    /**
+     * 生成一个唯一的 SHA1 值
+     * @return string
+     */
+    public static function sha1()
+    {
+        return self::build('sha1');
+    }
+
+    /**
      * 能用的随机数生成
-     * @param string $type 类型 alpha/alnum/numeric/nozero/unique/md5/encrypt/sha1
+     *
+     * 参数 `$type` :
+     *   可选值 ： alpha/alnum/numeric/nozero/uniqid/md5/sha1
+     * @param string $type 类型
      * @param int $len 长度
      * @return string
      */
-    public static function build($type = 'alnum', $len = 8)
+    protected static function build($type = 'alnum', $len = 8)
     {
         switch ($type) {
             case 'alpha':
@@ -83,11 +108,10 @@ class Random
                         $pool = '0123456789';
                 }
                 return substr(str_shuffle(str_repeat($pool, ceil($len / strlen($pool)))), 0, $len);
-            case 'unique':
+            case 'uniqid':
                 return uniqid(mt_rand());
             case 'md5':
                 return md5(mt_rand());
-            case 'encrypt':
             case 'sha1':
                 return sha1(uniqid(mt_rand(), true));
             default:

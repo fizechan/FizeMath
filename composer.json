@@ -1,7 +1,7 @@
 {
     "name": "fize/math",
     "description": "数学计算库",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "FizeChan",
