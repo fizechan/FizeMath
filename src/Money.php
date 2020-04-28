@@ -3,7 +3,7 @@
 namespace fize\math;
 
 /**
- * 金额类
+ * 金额
  */
 class Money
 {
@@ -17,11 +17,11 @@ class Money
     /**
      * 人民币小写转大写
      *
-     * @param string $number 数值
-     * @param string $int_unit 币种单位，默认"元"，有的需求可能为"圆"
-     * @param bool $is_round 是否对小数进行四舍五入
-     * @param bool $is_extra_zero 是否对整数部分以0结尾，小数存在的数字附加0,比如1960.30， 有的系统要求输出"壹仟玖佰陆拾元零叁角"，实际上"壹仟玖佰陆拾元叁角"也是对的
-     * @param bool $rmb 是否大写
+     * @param string $number        数值
+     * @param string $int_unit      币种单位，默认"元"，有的需求可能为"圆"
+     * @param bool   $is_round      是否对小数进行四舍五入
+     * @param bool   $is_extra_zero 是否对整数部分以0结尾，小数存在的数字附加0,比如1960.30， 有的系统要求输出"壹仟玖佰陆拾元零叁角"，实际上"壹仟玖佰陆拾元叁角"也是对的
+     * @param bool   $rmb           是否大写
      * @return string
      */
     public static function upper($number, $int_unit = '', $is_round = FALSE, $is_extra_zero = TRUE, $rmb = TRUE)
@@ -77,7 +77,7 @@ class Money
             $u2 = $str != '' ? $exp[$k] : '';
             $res = $str . $u2 . $res;
         }
-        $res.='元';
+        $res .= '元';
 
         // 如果小数部分处理完之后是00，需要处理下
         $dec = rtrim($dec, '0');

@@ -1,7 +1,4 @@
 <?php
-/** @noinspection PhpIncompatibleReturnTypeInspection */
-/** @noinspection PhpUndefinedFunctionInspection */
-/** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace fize\math;
 
@@ -47,10 +44,10 @@ class Gmp
 
     /**
      * 二项式系数计算
-     * @since PHP7.3.0
      * @param GP|string $n
-     * @param int $k 整数
+     * @param int       $k 整数
      * @return GP 失败时返回false
+     * @since PHP7.3.0
      */
     public static function binomial($n, $k)
     {
@@ -60,7 +57,7 @@ class Gmp
     /**
      * 清除位索引
      * @param GP|string $a
-     * @param int $index 索引，从0开始
+     * @param int       $index 索引，从0开始
      */
     public static function clrbit(&$a, $index)
     {
@@ -90,9 +87,9 @@ class Gmp
 
     /**
      * 除法运算得商
-     * @param GP|string $a 被除数
-     * @param GP|string $b 除数
-     * @param int $round 余数处理方法选项
+     * @param GP|string $a     被除数
+     * @param GP|string $b     除数
+     * @param int       $round 余数处理方法选项
      * @return GP
      */
     public static function divQ($a, $b, $round = 0)
@@ -104,7 +101,7 @@ class Gmp
      * 除数得商和余
      * @param GP|string $n 被除数
      * @param GP|string $d 除数
-     * @param int $round
+     * @param int       $round
      * @return array 余数处理方法选项
      */
     public static function divQr($n, $d, $round = 0)
@@ -114,9 +111,9 @@ class Gmp
 
     /**
      * 除法运算得余
-     * @param GP|string $n 被除数
-     * @param GP|string $d 除数
-     * @param int $round 余数处理方法选项
+     * @param GP|string $n     被除数
+     * @param GP|string $d     除数
+     * @param int       $round 余数处理方法选项
      * @return GP
      */
     public static function divR($n, $d, $round = 0)
@@ -126,9 +123,9 @@ class Gmp
 
     /**
      * 除法运算得商
-     * @param GP|string $a 被除数
-     * @param GP|string $b 除数
-     * @param int $round 余数处理方法选项
+     * @param GP|string $a     被除数
+     * @param GP|string $b     除数
+     * @param int       $round 余数处理方法选项
      * @return GP
      */
     public static function div($a, $b, $round = 0)
@@ -149,7 +146,7 @@ class Gmp
 
     /**
      * 导出到二进制字符串
-     * @param GP $gmpnumber
+     * @param GP  $gmpnumber
      * @param int $word_size
      * @param int $options
      * @return string 失败时返回false
@@ -206,7 +203,7 @@ class Gmp
 
     /**
      * 从二进制字符串导入
-     * @param $data
+     * @param     $data
      * @param int $word_size
      * @param int $options
      * @return false|GP
@@ -218,7 +215,7 @@ class Gmp
 
     /**
      * 创建一个GMP数值
-     * @param $number
+     * @param     $number
      * @param int $base
      * @return GP
      */
@@ -261,10 +258,10 @@ class Gmp
 
     /**
      * 克罗内克符号
-     * @since PHP7.3.0
      * @param $a
      * @param $b
      * @return int
+     * @since PHP7.3.0
      */
     public static function kronecker($a, $b)
     {
@@ -273,10 +270,10 @@ class Gmp
 
     /**
      * 预期最大公约数
-     * @since PHP7.3.0
      * @param $a
      * @param $b
      * @return GP
+     * @since PHP7.3.0
      */
     public static function lcm($a, $b)
     {
@@ -349,9 +346,9 @@ class Gmp
 
     /**
      * 完美幂检查
-     * @since PHP7.3.0
      * @param $a
      * @return bool
+     * @since PHP7.3.0
      */
     public static function perfectPower($a)
     {
@@ -403,7 +400,7 @@ class Gmp
 
     /**
      * 检查number是否为素数
-     * @param $a
+     * @param     $a
      * @param int $reps
      * @return int
      */
@@ -445,9 +442,9 @@ class Gmp
 
     /**
      * 随机数
-     * @deprecated 该方法自PHP7.2后被移除，不鼓励使用该方法
      * @param int $limiter
      * @return GP
+     * @deprecated 该方法自PHP7.2后被移除，不鼓励使用该方法
      */
     public static function random($limiter = 20)
     {
@@ -468,7 +465,7 @@ class Gmp
     /**
      * 取n次根的整数部分和余数
      * @param GP $a
-     * @param $nth
+     * @param    $nth
      * @return array
      */
     public static function rootrem(GP $a, $nth)
@@ -500,8 +497,8 @@ class Gmp
 
     /**
      * 设置二进位
-     * @param $a
-     * @param $index
+     * @param      $a
+     * @param      $index
      * @param bool $set_clear
      */
     public static function setbit(&$a, $index, $set_clear = true)
@@ -541,7 +538,7 @@ class Gmp
 
     /**
      * 将数值转化为字符串
-     * @param $gmpnumber
+     * @param     $gmpnumber
      * @param int $base
      * @return string
      */
