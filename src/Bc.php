@@ -82,6 +82,19 @@ class Bc
     }
 
     /**
+     * 多个任意精度的数字除法计算
+     * @param mixed $left_operand   被除数
+     * @param array $right_operands 除数组成的数组
+     * @param int   $scale          指定结果小数位，默认是自动
+     * @return string 返回结果为字符串类型的结果，如果右操作数是0结果为null
+     */
+    public static function divs($left_operand, array $right_operands, $scale = null)
+    {
+        $right_operand = self::muls($right_operands, $scale);
+        return self::div($left_operand, $right_operand, $scale);
+    }
+
+    /**
      * 对一个任意精度数字取模
      * @param mixed $left_operand 左操作数
      * @param mixed $modulus      系数
@@ -111,7 +124,7 @@ class Bc
 
     /**
      * 多个任意精度数字的乘法法计算，返回字符串结果
-     * @param array $operands 要累乘的数值组成的驻足
+     * @param array $operands 要累乘的数值组成的数组
      * @param int   $scale    指定结果小数位，默认是自动
      * @return string
      */
@@ -196,5 +209,18 @@ class Bc
         } else {
             return bcsub((string)$left_operand, (string)$right_operand, $scale);
         }
+    }
+
+    /**
+     * 任意个任意精度数字的减法
+     * @param mixed $left_operand   被减数
+     * @param array $right_operands 减数组成的数组
+     * @param int   $scale          设置结果中小数点后的小数位数
+     * @return string
+     */
+    public static function subs($left_operand, array $right_operands, $scale = null)
+    {
+        $right_operand = self::adds($right_operands, $scale);
+        return self::sub($left_operand, $right_operand, $scale);
     }
 }
