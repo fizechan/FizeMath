@@ -24,7 +24,7 @@ class Money
      * @param bool   $rmb           是否大写
      * @return string
      */
-    public static function upper($number, $int_unit = '', $is_round = FALSE, $is_extra_zero = TRUE, $rmb = TRUE)
+    public static function upper($number, $int_unit = '', $is_round = false, $is_extra_zero = true, $rmb = true)
     {
         // 将数字切分成两段
         $parts = explode('.', $number, 2);

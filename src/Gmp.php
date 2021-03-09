@@ -2,7 +2,7 @@
 
 namespace fize\math;
 
-use GMP as GP;
+use GMP as G_M_P;
 
 /**
  * GMP数学扩展
@@ -12,8 +12,8 @@ class Gmp
 
     /**
      * 获取绝对值
-     * @param GP|string $a 值
-     * @return GP
+     * @param G_M_P|string $a 值
+     * @return G_M_P
      */
     public static function abs($a)
     {
@@ -22,9 +22,9 @@ class Gmp
 
     /**
      * 加法运算
-     * @param GP|string $a 被加数
-     * @param GP|string $b 加数
-     * @return GP
+     * @param G_M_P|string $a 被加数
+     * @param G_M_P|string $b 加数
+     * @return G_M_P
      */
     public static function add($a, $b)
     {
@@ -33,9 +33,9 @@ class Gmp
 
     /**
      * AND运算
-     * @param GP|string $a 值1
-     * @param GP|string $b 值2
-     * @return GP
+     * @param G_M_P|string $a 值1
+     * @param G_M_P|string $b 值2
+     * @return G_M_P
      */
     public static function and($a, $b)
     {
@@ -44,9 +44,9 @@ class Gmp
 
     /**
      * 二项式系数计算
-     * @param GP|string $n
+     * @param G_M_P|string $n
      * @param int       $k 整数
-     * @return GP 失败时返回false
+     * @return G_M_P 失败时返回false
      * @since PHP7.3.0
      */
     public static function binomial($n, $k)
@@ -56,7 +56,7 @@ class Gmp
 
     /**
      * 清除位索引
-     * @param GP|string $a
+     * @param G_M_P|string $a
      * @param int       $index 索引，从0开始
      */
     public static function clrbit(&$a, $index)
@@ -66,8 +66,8 @@ class Gmp
 
     /**
      * 比较数值
-     * @param GP|string $a 值1
-     * @param GP|string $b 值2
+     * @param G_M_P|string $a 值1
+     * @param G_M_P|string $b 值2
      * @return int 值1>值2返回1，值1=值2返回0，值1小于值2返回-1
      */
     public static function cmp($a, $b)
@@ -77,8 +77,8 @@ class Gmp
 
     /**
      * 计算数值的补码
-     * @param GP|string $a 数值
-     * @return GP
+     * @param G_M_P|string $a 数值
+     * @return G_M_P
      */
     public static function com($a)
     {
@@ -87,10 +87,10 @@ class Gmp
 
     /**
      * 除法运算得商
-     * @param GP|string $a     被除数
-     * @param GP|string $b     除数
+     * @param G_M_P|string $a     被除数
+     * @param G_M_P|string $b     除数
      * @param int       $round 余数处理方法选项
-     * @return GP
+     * @return G_M_P
      */
     public static function divQ($a, $b, $round = 0)
     {
@@ -99,8 +99,8 @@ class Gmp
 
     /**
      * 除数得商和余
-     * @param GP|string $n 被除数
-     * @param GP|string $d 除数
+     * @param G_M_P|string $n 被除数
+     * @param G_M_P|string $d 除数
      * @param int       $round
      * @return array 余数处理方法选项
      */
@@ -111,10 +111,10 @@ class Gmp
 
     /**
      * 除法运算得余
-     * @param GP|string $n     被除数
-     * @param GP|string $d     除数
+     * @param G_M_P|string $n     被除数
+     * @param G_M_P|string $d     除数
      * @param int       $round 余数处理方法选项
-     * @return GP
+     * @return G_M_P
      */
     public static function divR($n, $d, $round = 0)
     {
@@ -123,10 +123,10 @@ class Gmp
 
     /**
      * 除法运算得商
-     * @param GP|string $a     被除数
-     * @param GP|string $b     除数
+     * @param G_M_P|string $a     被除数
+     * @param G_M_P|string $b     除数
      * @param int       $round 余数处理方法选项
-     * @return GP
+     * @return G_M_P
      */
     public static function div($a, $b, $round = 0)
     {
@@ -135,9 +135,9 @@ class Gmp
 
     /**
      * 精确除数法
-     * @param GP|string $n 被除数
-     * @param GP|string $d 除数
-     * @return GP
+     * @param G_M_P|string $n 被除数
+     * @param G_M_P|string $d 除数
+     * @return G_M_P
      */
     public static function divexact($n, $d)
     {
@@ -146,12 +146,12 @@ class Gmp
 
     /**
      * 导出到二进制字符串
-     * @param GP  $gmpnumber
+     * @param G_M_P  $gmpnumber
      * @param int $word_size
      * @param int $options
      * @return string 失败时返回false
      */
-    public static function export(GP $gmpnumber, $word_size = 1, $options = 1 | 16)
+    public static function export(G_M_P $gmpnumber, $word_size = 1, $options = 1 | 16)
     {
         return gmp_export($gmpnumber, $word_size, $options);
     }
@@ -159,7 +159,7 @@ class Gmp
     /**
      * 阶乘
      * @param $a
-     * @return GP
+     * @return G_M_P
      */
     public static function fact($a)
     {
@@ -170,7 +170,7 @@ class Gmp
      * 最大公约数
      * @param $a
      * @param $b
-     * @return GP
+     * @return G_M_P
      */
     public static function gcd($a, $b)
     {
@@ -206,7 +206,7 @@ class Gmp
      * @param     $data
      * @param int $word_size
      * @param int $options
-     * @return false|GP
+     * @return false|G_M_P
      */
     public static function import($data, $word_size = 1, $options = 1 | 16)
     {
@@ -217,7 +217,7 @@ class Gmp
      * 创建一个GMP数值
      * @param     $number
      * @param int $base
-     * @return GP
+     * @return G_M_P
      */
     public static function init($number, $base = 0)
     {
@@ -226,7 +226,7 @@ class Gmp
 
     /**
      * 将数值转化为int类型
-     * @param GP|string $gmpnumber
+     * @param G_M_P|string $gmpnumber
      * @return int
      */
     public static function intval($gmpnumber)
@@ -238,7 +238,7 @@ class Gmp
      * 逆的模
      * @param $a
      * @param $b
-     * @return GP
+     * @return G_M_P
      */
     public static function invert($a, $b)
     {
@@ -272,7 +272,7 @@ class Gmp
      * 预期最大公约数
      * @param $a
      * @param $b
-     * @return GP
+     * @return G_M_P
      * @since PHP7.3.0
      */
     public static function lcm($a, $b)
@@ -295,7 +295,7 @@ class Gmp
      * 模操作
      * @param $n
      * @param $d
-     * @return GP
+     * @return G_M_P
      */
     public static function mod($n, $d)
     {
@@ -306,7 +306,7 @@ class Gmp
      * 乘法运算
      * @param $a
      * @param $b
-     * @return GP
+     * @return G_M_P
      */
     public static function mul($a, $b)
     {
@@ -316,7 +316,7 @@ class Gmp
     /**
      * 返回一个数字的负值。
      * @param $a
-     * @return GP
+     * @return G_M_P
      */
     public static function neg($a)
     {
@@ -326,7 +326,7 @@ class Gmp
     /**
      * 求下一个质数
      * @param $a
-     * @return GP
+     * @return G_M_P
      */
     public static function nextprime($a)
     {
@@ -337,7 +337,7 @@ class Gmp
      * OR操作
      * @param $a
      * @param $b
-     * @return GP
+     * @return G_M_P
      */
     public static function or($a, $b)
     {
@@ -379,7 +379,7 @@ class Gmp
      * 幂运算
      * @param $base
      * @param $exp
-     * @return GP
+     * @return G_M_P
      */
     public static function pow($base, $exp)
     {
@@ -391,7 +391,7 @@ class Gmp
      * @param $base
      * @param $exp
      * @param $mod
-     * @return GP
+     * @return G_M_P
      */
     public static function powm($base, $exp, $mod)
     {
@@ -412,7 +412,7 @@ class Gmp
     /**
      * 随机数
      * @param $bits
-     * @return GP
+     * @return G_M_P
      */
     public static function randomBits($bits)
     {
@@ -423,7 +423,7 @@ class Gmp
      * 产生范围内随机数
      * @param $min
      * @param $max
-     * @return GP
+     * @return G_M_P
      */
     public static function randomRange($min, $max)
     {
@@ -432,7 +432,7 @@ class Gmp
 
     /**
      * 设置随机数种子
-     * @param GP|string $seed
+     * @param G_M_P|string $seed
      * @return mixed
      */
     public static function randomSeed($seed)
@@ -443,7 +443,7 @@ class Gmp
     /**
      * 随机数
      * @param int $limiter
-     * @return GP
+     * @return G_M_P
      * @deprecated 该方法自PHP7.2后被移除，不鼓励使用该方法
      */
     public static function random($limiter = 20)
@@ -455,7 +455,7 @@ class Gmp
      * 取n次方根的整数部分
      * @param $a
      * @param $nth
-     * @return GP
+     * @return G_M_P
      */
     public static function root($a, $nth)
     {
@@ -464,11 +464,11 @@ class Gmp
 
     /**
      * 取n次根的整数部分和余数
-     * @param GP $a
+     * @param G_M_P $a
      * @param    $nth
      * @return array
      */
-    public static function rootrem(GP $a, $nth)
+    public static function rootrem(G_M_P $a, $nth)
     {
         return gmp_rootrem($a, $nth);
     }
@@ -519,7 +519,7 @@ class Gmp
     /**
      * 计算平方根
      * @param $a
-     * @return GP
+     * @return G_M_P
      */
     public static function sqrt($a)
     {
@@ -551,7 +551,7 @@ class Gmp
      * 减法运算
      * @param $a
      * @param $b
-     * @return GP
+     * @return G_M_P
      */
     public static function sub($a, $b)
     {
@@ -573,7 +573,7 @@ class Gmp
      * XOR运算
      * @param $a
      * @param $b
-     * @return GP
+     * @return G_M_P
      */
     public static function xor($a, $b)
     {
