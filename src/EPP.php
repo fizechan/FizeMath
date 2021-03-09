@@ -3,11 +3,10 @@
 
 namespace fize\math;
 
-
 /**
- * 等额本息
+ * 等额本金
  */
-class ELP
+class EPP
 {
     /**
      * @var float 贷款金额
@@ -64,15 +63,12 @@ class ELP
     }
 
     /**
-     * 每期还款金额
+     * 每期本金
      * @return float
      */
-    public function issueRent()
+    public function issueCapital()
     {
-        $issue_ir = $this->issueInterestRate();
-        $numerator = $this->capital * $issue_ir * pow(1 + $issue_ir, $this->issues);
-        $denominator = pow(1 + $issue_ir, $this->issues) - 1;
-        return $numerator / $denominator;
+        return $this->capital / $this->issues;
     }
 
     /**
@@ -81,7 +77,7 @@ class ELP
      */
     public function totalRent()
     {
-        return $this->issueRent() * $this->issues;
+        return $this->totalInterest() + $this->capital;
     }
 
     /**
@@ -90,7 +86,7 @@ class ELP
      */
     public function totalInterest()
     {
-        return $this->totalRent() - $this->capital;
+        return ($this->issues + 1) * $this->capital * $this->issueInterestRate() / 2;
     }
 
     /**
@@ -104,12 +100,13 @@ class ELP
     {
         $plans = [];
         $plans[] = [-$this->capital, -$this->capital, 0];  // 第0期为放款
-        $issue_rent = round($this->issueRent(), $scale);
+        $issue_capital = round($this->issueCapital(), $scale);
 
         $capital_balance = $this->capital;
         for ($issue = 1; $issue <= $this->issues; $issue++) {
+            $capital = round($issue_capital, $scale);  // 本金
             $interest = round($capital_balance * $this->issueInterestRate(), $scale);  // 利息
-            $capital = round($issue_rent - $interest, $scale);  // 本金
+            $issue_rent = round($capital + $interest, $scale);  // 租金
             $plans[$issue] = [$issue_rent, $capital, $interest];
             $capital_balance = round($capital_balance - $capital, $scale);
         }
@@ -125,8 +122,8 @@ class ELP
             }
         }
         $capital_fix = round($this->capital - $capital_sum, $scale);
-        $interest_fix = round($issue_rent - $capital_fix, $scale);
-        $plans[$fix_issue] = [$issue_rent, $capital_fix, $interest_fix];
+        $rent_fix = round($capital_fix + $plans[$fix_issue][2], $scale);
+        $plans[$fix_issue] = [$rent_fix, $capital_fix, $plans[$fix_issue][2]];
 
         if (!$with_issue_zero) {
             array_shift($plans);
