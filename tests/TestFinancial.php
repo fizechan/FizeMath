@@ -108,6 +108,26 @@ class TestFinancial extends TestCase
         $irr = Financial::irr($values);
         var_dump($irr);
         self::assertIsFloat($irr);
+
+        $values = [
+            -800000.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            55790.00,
+            100
+        ];
+        self::assertCount(13, $values);
+        $irr = Financial::irr($values);
+        var_dump($irr);
+        self::assertIsFloat($irr);
     }
 
     public function testMirr()
