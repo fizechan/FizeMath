@@ -3,6 +3,8 @@
 
 namespace fize\math;
 
+use fize\datetime\Date;
+
 /**
  * 等额本金
  */
@@ -134,9 +136,9 @@ class EPP
 
     /**
      * 含日期信息的租金计划
-     * @param string $loan_date 起租日期
-     * @param int    $scale 保留小数位
-     * @param int    $fix_issue 修正的期数
+     * @param string $loan_date       起租日期
+     * @param int    $scale           保留小数位
+     * @param int    $fix_issue       修正的期数
      * @param false  $with_issue_zero 是否附带第0期(即放款期)
      * @return array 日期 => [租金, 本金, 利息]
      */
@@ -145,25 +147,12 @@ class EPP
         $plans = $this->plans($scale, $fix_issue, true);
         $datePlans = [];
         for ($issue = 0; $issue <= $this->issues; $issue++) {
-            $datePlans[$this->getIssueDate($loan_date, $issue)] = $plans[$issue];
+            $date = Date::getAfter($loan_date, $issue * $this->issueMonths);
+            $datePlans[$date] = $plans[$issue];
         }
         if (!$with_issue_zero) {
             unset($datePlans[$loan_date]);
         }
         return $datePlans;
-    }
-
-    /**
-     * 获取指定期的日期
-     * @param string $loan_date 起租日期
-     * @param int    $issue     期数
-     * @return string
-     */
-    private function getIssueDate($loan_date, $issue)
-    {
-        list($sYear, $sMonth) = explode('-', $loan_date);
-        $monthend = date("Y-m-d", strtotime("+" . ($this->issueMonths * $issue + 1) . " month -1 day", strtotime($sYear . '-' . $sMonth . '-01')));
-        $nextDate = date("Y-m-d", strtotime("+" . ($this->issueMonths * $issue) . " month", strtotime($loan_date)));
-        return $nextDate > $monthend ? $monthend : $nextDate;
     }
 }
