@@ -171,12 +171,12 @@ class Financial
         }
         // 出现0则直接取0
         if ($oldRate == 0 || $newRate == 0) {
-            return $oldRate == 0 ? $oldRate : $newRate;
+            return $oldRate == 0 ? (float)$oldRate : (float)$newRate;
         }
 
         // 两值相同时直接返回
         if ($oldRate == $newRate) {
-            return $oldRate;
+            return (float)$oldRate;
         }
 
         // 线性插值算法
@@ -193,7 +193,7 @@ class Financial
         }
         $rate = $npv1 / (abs($npv1) + abs($npv2)) * ($rate2 - $rate1) + $rate1;
 
-        return $rate;
+        return (float)$rate;
     }
 
     /**
@@ -288,7 +288,7 @@ class Financial
      * @param array $dates   日期表
      * @param float $guess   估计值
      * @param int   $maxiter 尝试次数
-     * @return float
+     * @return float 无法找到时返回 null
      */
     public static function xirr(array $values, array $dates, $guess = 0.1, $maxiter = 10000)
     {
@@ -306,6 +306,9 @@ class Financial
                     $step /= 2.0;
                 }
             }
+        }
+        if (abs($residual) > $epsilon) {
+            return null;
         }
         return $guess;
     }
