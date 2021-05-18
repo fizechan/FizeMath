@@ -5,6 +5,7 @@ namespace fize\math;
 
 use DateTime;
 use Exception;
+use RuntimeException;
 
 /**
  * 金融相关
@@ -134,15 +135,16 @@ class Financial
      * 内部收益率
      * @param array $values  现金流
      * @param float $guess   估计值
+     * @param int   $precise 精确小数位
      * @param int   $maxiter 尝试次数
-     * @return float 无法找到时返回 null
+     * @return float
      */
-    public static function irr(array $values, $guess = 0.1, $maxiter = 10000)
+    public static function irr(array $values, $guess = 0.1, $precise = 7, $maxiter = 10000)
     {
         if (!self::hasPN($values)) {
-            return null;
+            throw new RuntimeException('IRR cannot be calculated: cash flow error!');
         }
-        $epsMax = 0.000000000000001;  // 误差
+        $epsMax = pow(10, -$precise);  // 误差
         $tryCount = 0;
         $oldRate = $guess;
         $newRate = $guess;
@@ -163,11 +165,17 @@ class Financial
                 $find_irr = true;
                 break;
             }
+
+            if ($oldNpv == $newNpv && abs($epsRate) <= $epsMax) {
+                $find_irr = true;
+                break;
+            }
+
             $oldRate = $newRate;
             $tryCount++;
         }
         if (!$find_irr) {
-            return null;
+            throw new RuntimeException('IRR cannot be calculated: out of calculation times!');
         }
         // 出现0则直接取0
         if ($oldRate == 0 || $newRate == 0) {
@@ -287,30 +295,48 @@ class Financial
      * @param array $values  现金流
      * @param array $dates   日期表
      * @param float $guess   估计值
+     * @param int   $precise 精确小数位
      * @param int   $maxiter 尝试次数
-     * @return float 无法找到时返回 null
+     * @return float
      */
-    public static function xirr(array $values, array $dates, $guess = 0.1, $maxiter = 10000)
+    public static function xirr(array $values, array $dates, $guess = 0.1, $precise = 15, $maxiter = 10000)
     {
+        if (!self::hasPN($values)) {
+            throw new RuntimeException('XIRR cannot be calculated: cash flow error!');
+        }
+        $last_add_Guess = $guess;
         $residual = 1;
         $step = 0.05;
-        $epsilon = 0.00000001;
+        $epsilon = pow(10, -$precise);
         while (abs($residual) > $epsilon && $maxiter > 0) {
             $maxiter -= 1;
             $residual = self::xnpv($guess, $values, $dates);
             if (abs($residual) > $epsilon) {
                 if ($residual > 0) {
                     $guess += $step;
+                    $last_add_Guess = $guess;
                 } else {
                     $guess -= $step;
-                    $step /= 2.0;
+                    $last_sub_Guess = $guess;
+
+                    if ($step > $epsilon) {
+                        $step *= 0.5;
+                    } else {
+                        $step *= 0.9;
+                    }
+
+//                    if ($step > $epsilon || $last_sub_Guess == $last_add_Guess || $last_sub_Guess + $step >= $last_add_Guess) {
+//                        $step /= 2.0;
+//                    } else {
+//                        $kk = 1;
+//                    }
                 }
             }
         }
         if (abs($residual) > $epsilon) {
-            return null;
+            throw new RuntimeException('XIRR cannot be calculated: out of calculation times!');
         }
-        return $guess;
+        return (float)$guess;
     }
 
     /**
