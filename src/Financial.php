@@ -322,9 +322,12 @@ class Financial
                     $last_sub_Guess = $guess;
                 }
                 $step = abs($last_add_Guess - $last_sub_Guess) / 2;
+                if ($step == 0) {  // 精度丢失导致两猜测值已相同
+                    break;
+                }
             }
         }
-        if (abs($residual) > $epsilon) {
+        if ($step != 0 && abs($residual) > $epsilon) {
             throw new RuntimeException('XIRR cannot be calculated: out of calculation times!');
         }
         return (float)$guess;
