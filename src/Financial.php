@@ -248,12 +248,13 @@ class Financial
      * @param float $fv      本金余值
      * @param int   $type    0-期末支付；1期初支付
      * @param float $guess   估计值
+     * @param int   $precise 精确小数位
      * @param int   $maxiter 尝试次数
      * @return float
      */
-    public static function rate($nper, $pmt, $pv, $fv = 0, $type = 0, $guess = 0.1, $maxiter = 10000)
+    public static function rate($nper, $pmt, $pv, $fv = 0, $type = 0, $guess = 0.1, $precise = 8, $maxiter = 10000)
     {
-        $tol = 0.0000001;  // 误差
+        $tol = pow(10, -$precise);  // 误差
         $rn = $guess;
         $iterator = 0;
         $close = false;
@@ -265,7 +266,7 @@ class Financial
             $rn = $rnp1;
         }
         if (!$close) {
-            return null;
+            throw new RuntimeException('RATE cannot be calculated: out of calculation times!');
         } else {
             return $rn;
         }
@@ -299,12 +300,13 @@ class Financial
      * @param int   $maxiter 尝试次数
      * @return float
      */
-    public static function xirr(array $values, array $dates, $guess = 0.1, $precise = 15, $maxiter = 10000)
+    public static function xirr(array $values, array $dates, $guess = 0.1, $precise = 8, $maxiter = 10000)
     {
         if (!self::hasPN($values)) {
             throw new RuntimeException('XIRR cannot be calculated: cash flow error!');
         }
         $last_add_Guess = $guess;
+        $last_sub_Guess = $guess;
         $residual = 1;
         $step = 0.05;
         $epsilon = pow(10, -$precise);
@@ -318,19 +320,8 @@ class Financial
                 } else {
                     $guess -= $step;
                     $last_sub_Guess = $guess;
-
-                    if ($step > $epsilon) {
-                        $step *= 0.5;
-                    } else {
-                        $step *= 0.9;
-                    }
-
-//                    if ($step > $epsilon || $last_sub_Guess == $last_add_Guess || $last_sub_Guess + $step >= $last_add_Guess) {
-//                        $step /= 2.0;
-//                    } else {
-//                        $kk = 1;
-//                    }
                 }
+                $step = abs($last_add_Guess - $last_sub_Guess) / 2;
             }
         }
         if (abs($residual) > $epsilon) {
