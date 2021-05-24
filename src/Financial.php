@@ -321,10 +321,9 @@ class Financial
                     $guess -= $step;
                     $last_sub_Guess = $guess;
                 }
-                $step = abs($last_add_Guess - $last_sub_Guess) / 2;
-                if ($step == 0) {  // 精度丢失导致两猜测值已相同
-                    break;
-                }
+                $dist = abs((float)Bc::sub($last_add_Guess, $last_sub_Guess, $precise + 2));
+                $dist = number_format($dist, $precise + 2);
+                $step = (float)Bc::div($dist, 2, $precise + 2);
             }
         }
         if ($step != 0 && abs($residual) > $epsilon) {
