@@ -8,19 +8,19 @@
       "email": "chenfengzhan@qq.com"
     }
   ],
-  "require": {
-    "php": ">=7.0.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~9.5.0"
-  },
-  "suggest": {
-    "ext-bcmath": "*",
-    "ext-gmp": "*"
-  },
   "autoload": {
     "psr-4": {
       "fize\\math\\": "src"
     }
+  },
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5.0"
+  },
+  "suggest": {
+    "ext-bcmath": "*",
+    "ext-gmp": "*"
   }
 }

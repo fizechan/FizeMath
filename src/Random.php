@@ -13,7 +13,7 @@ class Random
      * @param int $len 长度
      * @return string
      */
-    public static function alnum($len = 6)
+    public static function alnum(int $len = 6): string
     {
         return self::build('alnum', $len);
     }
@@ -23,7 +23,7 @@ class Random
      * @param int $len 长度
      * @return string
      */
-    public static function alpha($len = 6)
+    public static function alpha(int $len = 6): string
     {
         return self::build('alpha', $len);
     }
@@ -33,7 +33,7 @@ class Random
      * @param int $len 长度
      * @return string
      */
-    public static function numeric($len = 4)
+    public static function numeric(int $len = 4): string
     {
         return self::build('numeric', $len);
     }
@@ -43,7 +43,7 @@ class Random
      * @param int $len 长度
      * @return string
      */
-    public static function nozero($len = 4)
+    public static function nozero(int $len = 4): string
     {
         return self::build('nozero', $len);
     }
@@ -52,7 +52,7 @@ class Random
      * 基于以微秒计的当前时间，生成一个唯一的 ID
      * @return string
      */
-    public static function uniqid()
+    public static function uniqid(): string
     {
         return self::build('uniqid');
     }
@@ -61,7 +61,7 @@ class Random
      * 生成一个唯一的 MD5 值
      * @return string
      */
-    public static function md5()
+    public static function md5(): string
     {
         return self::build('md5');
     }
@@ -70,7 +70,7 @@ class Random
      * 生成一个唯一的 SHA1 值
      * @return string
      */
-    public static function sha1()
+    public static function sha1(): string
     {
         return self::build('sha1');
     }
@@ -84,7 +84,7 @@ class Random
      * @param int    $len  长度
      * @return string
      */
-    protected static function build($type = 'alnum', $len = 8)
+    protected static function build(string $type = 'alnum', int $len = 8): string
     {
         switch ($type) {
             case 'alpha':
@@ -127,7 +127,7 @@ class Random
      * @param bool  $unique 默认为true,即当num>1时,随机出的数量是否唯一
      * @return mixed 当num为1时返回键名,反之返回一维数组
      */
-    public static function lottery($ps, $num = 1, $unique = true)
+    public static function lottery(array $ps, int $num = 1, bool $unique = true)
     {
         if (!$ps) {
             return $num == 1 ? '' : [];
@@ -138,7 +138,7 @@ class Random
         }
         $max_exp = 0;
         $res = [];
-        foreach ($ps as $key => $value) {
+        foreach ($ps as $value) {
             $value = substr($value, 0, stripos($value, ".") + 6);
             $exp = strlen(strchr($value, '.')) - 1;
             if ($exp > $max_exp) {
@@ -186,7 +186,7 @@ class Random
      * 获取全球唯一标识
      * @return string
      */
-    public static function uuid()
+    public static function uuid(): string
     {
         return sprintf(
             '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
