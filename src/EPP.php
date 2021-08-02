@@ -37,7 +37,7 @@ class EPP
      * @param int   $issues               还款期数
      * @param int   $issue_months         每期月数
      */
-    public function __construct($capital, $annual_interest_rate, $issues, $issue_months = 1)
+    public function __construct(float $capital, float $annual_interest_rate, int $issues, int $issue_months = 1)
     {
         $this->capital = $capital;
         $this->annualInterestRate = $annual_interest_rate;
@@ -98,7 +98,7 @@ class EPP
      * @param false $with_issue_zero 是否附带第0期(即放款期)
      * @return array 下标 => [租金, 本金, 利息]
      */
-    public function plans($scale = 2, $fix_issue = -1, $with_issue_zero = false)
+    public function plans(int $scale = 2, int $fix_issue = -1, bool $with_issue_zero = false): array
     {
         $plans = [];
         $plans[] = [-$this->capital, -$this->capital, 0];  // 第0期为放款
@@ -142,7 +142,7 @@ class EPP
      * @param false  $with_issue_zero 是否附带第0期(即放款期)
      * @return array 日期 => [租金, 本金, 利息]
      */
-    public function datePlans($loan_date, $scale = 2, $fix_issue = -1, $with_issue_zero = false)
+    public function datePlans(string $loan_date, int $scale = 2, int $fix_issue = -1, bool $with_issue_zero = false): array
     {
         $plans = $this->plans($scale, $fix_issue, true);
         $datePlans = [];
