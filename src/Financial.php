@@ -5,6 +5,7 @@ namespace fize\math;
 
 use DateTime;
 use Exception;
+use RuntimeException;
 
 /**
  * 金融相关
@@ -21,7 +22,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function fv(float $rate, int $nper, float $pmt, float $pv, int $type = 0)
+    public static function fv($rate, $nper, $pmt, $pv, $type = 0)
     {
         $temp = pow(1 + $rate, $nper);
         if ($rate == 0) {
@@ -41,7 +42,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function pv(float $rate, int $nper, float $pmt, float $fv = 0, int $type = 0)
+    public static function pv($rate, $nper, $pmt, $fv = 0, $type = 0)
     {
         $temp = pow(1 + $rate, $nper);
         if ($rate == 0) {
@@ -58,7 +59,7 @@ class Financial
      * @param array $values 现金流
      * @return float
      */
-    public static function npv(float $rate, array $values)
+    public static function npv($rate, array $values)
     {
         $npv = 0;
         foreach ($values as $k => $v) {
@@ -78,7 +79,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function pmt(float $rate, int $nper, float $pv, float $fv = 0, int $type = 0)
+    public static function pmt($rate, $nper, $pv, $fv = 0, $type = 0)
     {
         $temp = pow(1 + $rate, $nper);
         $mask = $rate == 0;
@@ -101,7 +102,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function ppmt(float $rate, int $per, int $nper, float $pv, float $fv = 0, int $type = 0)
+    public static function ppmt($rate, $per, $nper, $pv, $fv = 0, $type = 0)
     {
         $total = self::pmt($rate, $nper, $pv, $fv, $type);
         return $total - self::ipmt($rate, $per, $nper, $pv, $fv, $type);
@@ -117,7 +118,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function ipmt(float $rate, int $per, int $nper, float $pv, float $fv = 0, int $type = 0)
+    public static function ipmt($rate, $per, $nper, $pv, $fv = 0, $type = 0)
     {
         $total_pmt = self::pmt($rate, $nper, $pv, $fv, $type);
         $ipmt = self::fv($rate, $per - 1, $total_pmt, $pv, $type) * $rate;
@@ -134,15 +135,16 @@ class Financial
      * 内部收益率
      * @param array $values  现金流
      * @param float $guess   估计值
+     * @param int   $precise 精确小数位
      * @param int   $maxiter 尝试次数
-     * @return float 无法找到时返回 null
+     * @return float
      */
-    public static function irr(array $values, float $guess = 0.1, int $maxiter = 10000)
+    public static function irr(array $values, $guess = 0.1, $precise = 7, $maxiter = 10000)
     {
         if (!self::hasPN($values)) {
-            return null;
+            throw new RuntimeException('IRR cannot be calculated: cash flow error!');
         }
-        $epsMax = 0.000000000000001;  // 误差
+        $epsMax = pow(10, -$precise);  // 误差
         $tryCount = 0;
         $oldRate = $guess;
         $newRate = $guess;
@@ -163,20 +165,26 @@ class Financial
                 $find_irr = true;
                 break;
             }
+
+            if ($oldNpv == $newNpv && abs($epsRate) <= $epsMax) {
+                $find_irr = true;
+                break;
+            }
+
             $oldRate = $newRate;
             $tryCount++;
         }
         if (!$find_irr) {
-            return null;
+            throw new RuntimeException('IRR cannot be calculated: out of calculation times!');
         }
         // 出现0则直接取0
         if ($oldRate == 0 || $newRate == 0) {
-            return $oldRate == 0 ? $oldRate : $newRate;
+            return $oldRate == 0 ? (float)$oldRate : (float)$newRate;
         }
 
         // 两值相同时直接返回
         if ($oldRate == $newRate) {
-            return $oldRate;
+            return (float)$oldRate;
         }
 
         // 线性插值算法
@@ -193,7 +201,7 @@ class Financial
         }
         $rate = $npv1 / (abs($npv1) + abs($npv2)) * ($rate2 - $rate1) + $rate1;
 
-        return $rate;
+        return (float)$rate;
     }
 
     /**
@@ -203,7 +211,7 @@ class Financial
      * @param float $reinvest_rate 再投资的收益率
      * @return float
      */
-    public static function mirr(array $values, float $finance_rate, float $reinvest_rate)
+    public static function mirr(array $values, $finance_rate, $reinvest_rate)
     {
         $n = count($values);
         $npvp = self::npv($reinvest_rate, self::positiveValues($values));
@@ -220,7 +228,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function nper(float $rate, float $pmt, float $pv, float $fv = 0, int $type = 0)
+    public static function nper($rate, $pmt, $pv, $fv = 0, $type = 0)
     {
         try {
             $z = $pmt * (1 + $rate * $type) / $rate;
@@ -240,12 +248,13 @@ class Financial
      * @param float $fv      本金余值
      * @param int   $type    0-期末支付；1期初支付
      * @param float $guess   估计值
+     * @param int   $precise 精确小数位
      * @param int   $maxiter 尝试次数
      * @return float
      */
-    public static function rate(int $nper, float $pmt, float $pv, float $fv = 0, int $type = 0, float $guess = 0.1, int $maxiter = 10000)
+    public static function rate($nper, $pmt, $pv, $fv = 0, $type = 0, $guess = 0.1, $precise = 8, $maxiter = 10000)
     {
-        $tol = 0.0000001;  // 误差
+        $tol = pow(10, -$precise);  // 误差
         $rn = $guess;
         $iterator = 0;
         $close = false;
@@ -257,7 +266,7 @@ class Financial
             $rn = $rnp1;
         }
         if (!$close) {
-            return null;
+            throw new RuntimeException('RATE cannot be calculated: out of calculation times!');
         } else {
             return $rn;
         }
@@ -270,7 +279,7 @@ class Financial
      * @param array $dates  日期表
      * @return float
      */
-    public static function xnpv(float $rate, array $values, array $dates)
+    public static function xnpv($rate, array $values, array $dates)
     {
         $xnpv = 0;
         $d0 = new DateTime($dates[0]);
@@ -287,27 +296,40 @@ class Financial
      * @param array $values  现金流
      * @param array $dates   日期表
      * @param float $guess   估计值
+     * @param int   $precise 精确小数位
      * @param int   $maxiter 尝试次数
      * @return float
      */
-    public static function xirr(array $values, array $dates, float $guess = 0.1, int $maxiter = 10000): float
+    public static function xirr(array $values, array $dates, $guess = 0.1, $precise = 8, $maxiter = 10000)
     {
+        if (!self::hasPN($values)) {
+            throw new RuntimeException('XIRR cannot be calculated: cash flow error!');
+        }
+        $last_add_Guess = $guess;
+        $last_sub_Guess = $guess;
         $residual = 1;
         $step = 0.05;
-        $epsilon = 0.00000001;
+        $epsilon = pow(10, -$precise);
         while (abs($residual) > $epsilon && $maxiter > 0) {
             $maxiter -= 1;
             $residual = self::xnpv($guess, $values, $dates);
             if (abs($residual) > $epsilon) {
                 if ($residual > 0) {
                     $guess += $step;
+                    $last_add_Guess = $guess;
                 } else {
                     $guess -= $step;
-                    $step /= 2.0;
+                    $last_sub_Guess = $guess;
                 }
+                $dist = abs((float)Bc::sub($last_add_Guess, $last_sub_Guess, $precise + 2));
+                $dist = number_format($dist, $precise + 2);
+                $step = (float)Bc::div($dist, 2, $precise + 2);
             }
         }
-        return $guess;
+        if ($step != 0 && abs($residual) > $epsilon) {
+            throw new RuntimeException('XIRR cannot be calculated: out of calculation times!');
+        }
+        return (float)$guess;
     }
 
     /**
@@ -315,7 +337,7 @@ class Financial
      * @param array $values 要判断的值
      * @return bool
      */
-    protected static function hasPN(array $values): bool
+    protected static function hasPN(array $values)
     {
         $hasP = false;
         $hasN = false;
@@ -339,7 +361,7 @@ class Financial
      * @param array $values 现金流
      * @return float
      */
-    protected static function firstDeriv(float $rate, array $values)
+    protected static function firstDeriv($rate, array $values)
     {
         $result = 0;
         foreach ($values as $k => $v) {
@@ -356,7 +378,7 @@ class Financial
      * @param array $values 数组
      * @return array
      */
-    protected static function positiveValues(array $values): array
+    protected static function positiveValues(array $values)
     {
         $vals = [];
         foreach ($values as $value) {
@@ -374,7 +396,7 @@ class Financial
      * @param array $values 数组
      * @return array
      */
-    protected static function negativeValues(array $values): array
+    protected static function negativeValues(array $values)
     {
         $vals = [];
         foreach ($values as $value) {

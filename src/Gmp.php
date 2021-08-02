@@ -15,7 +15,7 @@ class Gmp
      * @param GMP_|string $a 值
      * @return GMP_
      */
-    public static function abs($a): GMP_
+    public static function abs($a)
     {
         return gmp_abs($a);
     }
@@ -26,7 +26,7 @@ class Gmp
      * @param GMP_|string $b 加数
      * @return GMP_
      */
-    public static function add($a, $b): GMP_
+    public static function add($a, $b)
     {
         return gmp_add($a, $b);
     }
@@ -37,7 +37,7 @@ class Gmp
      * @param GMP_|string $b 值2
      * @return GMP_
      */
-    public static function and($a, $b): GMP_
+    public static function and($a, $b)
     {
         return gmp_and($a, $b);
     }
@@ -45,11 +45,11 @@ class Gmp
     /**
      * 二项式系数计算
      * @param GMP_|string $n
-     * @param int         $k 整数
+     * @param int       $k 整数
      * @return GMP_ 失败时返回false
      * @since PHP7.3.0
      */
-    public static function binomial($n, int $k): GMP_
+    public static function binomial($n, $k)
     {
         return gmp_binomial($n, $k);
     }
@@ -57,9 +57,9 @@ class Gmp
     /**
      * 清除位索引
      * @param GMP_|string $a
-     * @param int         $index 索引，从0开始
+     * @param int       $index 索引，从0开始
      */
-    public static function clrbit(&$a, int $index)
+    public static function clrbit(&$a, $index)
     {
         gmp_clrbit($a, $index);
     }
@@ -70,7 +70,7 @@ class Gmp
      * @param GMP_|string $b 值2
      * @return int 值1>值2返回1，值1=值2返回0，值1小于值2返回-1
      */
-    public static function cmp($a, $b): int
+    public static function cmp($a, $b)
     {
         return gmp_cmp($a, $b);
     }
@@ -80,7 +80,7 @@ class Gmp
      * @param GMP_|string $a 数值
      * @return GMP_
      */
-    public static function com($a): GMP_
+    public static function com($a)
     {
         return gmp_com($a);
     }
@@ -89,10 +89,10 @@ class Gmp
      * 除法运算得商
      * @param GMP_|string $a     被除数
      * @param GMP_|string $b     除数
-     * @param int         $round 余数处理方法选项
+     * @param int       $round 余数处理方法选项
      * @return GMP_
      */
-    public static function divQ($a, $b, int $round = 0): GMP_
+    public static function divQ($a, $b, $round = 0)
     {
         return gmp_div_q($a, $b, $round);
     }
@@ -101,10 +101,10 @@ class Gmp
      * 除数得商和余
      * @param GMP_|string $n 被除数
      * @param GMP_|string $d 除数
-     * @param int         $round
+     * @param int       $round
      * @return array 余数处理方法选项
      */
-    public static function divQr($n, $d, int $round = 0): array
+    public static function divQr($n, $d, $round = 0)
     {
         return gmp_div_qr($n, $d, $round);
     }
@@ -113,10 +113,10 @@ class Gmp
      * 除法运算得余
      * @param GMP_|string $n     被除数
      * @param GMP_|string $d     除数
-     * @param int         $round 余数处理方法选项
+     * @param int       $round 余数处理方法选项
      * @return GMP_
      */
-    public static function divR($n, $d, int $round = 0): GMP_
+    public static function divR($n, $d, $round = 0)
     {
         return gmp_div_r($n, $d, $round);
     }
@@ -125,10 +125,10 @@ class Gmp
      * 除法运算得商
      * @param GMP_|string $a     被除数
      * @param GMP_|string $b     除数
-     * @param int         $round 余数处理方法选项
+     * @param int       $round 余数处理方法选项
      * @return GMP_
      */
-    public static function div($a, $b, int $round = 0): GMP_
+    public static function div($a, $b, $round = 0)
     {
         return gmp_div($a, $b, $round);
     }
@@ -139,19 +139,19 @@ class Gmp
      * @param GMP_|string $d 除数
      * @return GMP_
      */
-    public static function divexact($n, $d): GMP_
+    public static function divexact($n, $d)
     {
         return gmp_divexact($n, $d);
     }
 
     /**
      * 导出到二进制字符串
-     * @param GMP_ $gmpnumber
-     * @param int  $word_size
-     * @param int  $options
+     * @param GMP_  $gmpnumber
+     * @param int $word_size
+     * @param int $options
      * @return string 失败时返回false
      */
-    public static function export(GMP_ $gmpnumber, int $word_size = 1, int $options = 1 | 16): string
+    public static function export(GMP_ $gmpnumber, $word_size = 1, $options = 1 | 16)
     {
         return gmp_export($gmpnumber, $word_size, $options);
     }
@@ -161,7 +161,7 @@ class Gmp
      * @param $a
      * @return GMP_
      */
-    public static function fact($a): GMP_
+    public static function fact($a)
     {
         return gmp_fact($a);
     }
@@ -172,7 +172,7 @@ class Gmp
      * @param $b
      * @return GMP_
      */
-    public static function gcd($a, $b): GMP_
+    public static function gcd($a, $b)
     {
         return gmp_gcd($a, $b);
     }
@@ -185,7 +185,7 @@ class Gmp
      * @param $b
      * @return array
      */
-    public static function gcdext($a, $b): array
+    public static function gcdext($a, $b)
     {
         return gmp_gcdext($a, $b);
     }
@@ -196,7 +196,7 @@ class Gmp
      * @param $b
      * @return int
      */
-    public static function hamdist($a, $b): int
+    public static function hamdist($a, $b)
     {
         return gmp_hamdist($a, $b);
     }
@@ -208,7 +208,7 @@ class Gmp
      * @param int $options
      * @return false|GMP_
      */
-    public static function import($data, int $word_size = 1, int $options = 1 | 16)
+    public static function import($data, $word_size = 1, $options = 1 | 16)
     {
         return gmp_import($data, $word_size, $options);
     }
@@ -219,7 +219,7 @@ class Gmp
      * @param int $base
      * @return GMP_
      */
-    public static function init($number, int $base = 0): GMP_
+    public static function init($number, $base = 0)
     {
         return gmp_init($number, $base);
     }
@@ -229,7 +229,7 @@ class Gmp
      * @param GMP_|string $gmpnumber
      * @return int
      */
-    public static function intval($gmpnumber): int
+    public static function intval($gmpnumber)
     {
         return gmp_intval($gmpnumber);
     }
@@ -240,7 +240,7 @@ class Gmp
      * @param $b
      * @return GMP_
      */
-    public static function invert($a, $b): GMP_
+    public static function invert($a, $b)
     {
         return gmp_invert($a, $b);
     }
@@ -251,7 +251,7 @@ class Gmp
      * @param $p
      * @return int
      */
-    public static function jacobi($a, $p): int
+    public static function jacobi($a, $p)
     {
         return gmp_jacobi($a, $p);
     }
@@ -263,7 +263,7 @@ class Gmp
      * @return int
      * @since PHP7.3.0
      */
-    public static function kronecker($a, $b): int
+    public static function kronecker($a, $b)
     {
         return gmp_kronecker($a, $b);
     }
@@ -275,7 +275,7 @@ class Gmp
      * @return GMP_
      * @since PHP7.3.0
      */
-    public static function lcm($a, $b): GMP_
+    public static function lcm($a, $b)
     {
         return gmp_lcm($a, $b);
     }
@@ -286,7 +286,7 @@ class Gmp
      * @param $p
      * @return int
      */
-    public static function legendre($a, $p): int
+    public static function legendre($a, $p)
     {
         return gmp_legendre($a, $p);
     }
@@ -297,7 +297,7 @@ class Gmp
      * @param $d
      * @return GMP_
      */
-    public static function mod($n, $d): GMP_
+    public static function mod($n, $d)
     {
         return gmp_mod($n, $d);
     }
@@ -308,7 +308,7 @@ class Gmp
      * @param $b
      * @return GMP_
      */
-    public static function mul($a, $b): GMP_
+    public static function mul($a, $b)
     {
         return gmp_mul($a, $b);
     }
@@ -318,7 +318,7 @@ class Gmp
      * @param $a
      * @return GMP_
      */
-    public static function neg($a): GMP_
+    public static function neg($a)
     {
         return gmp_neg($a);
     }
@@ -328,7 +328,7 @@ class Gmp
      * @param $a
      * @return GMP_
      */
-    public static function nextprime($a): GMP_
+    public static function nextprime($a)
     {
         return gmp_nextprime($a);
     }
@@ -339,7 +339,7 @@ class Gmp
      * @param $b
      * @return GMP_
      */
-    public static function or($a, $b): GMP_
+    public static function or($a, $b)
     {
         return gmp_or($a, $b);
     }
@@ -350,7 +350,7 @@ class Gmp
      * @return bool
      * @since PHP7.3.0
      */
-    public static function perfectPower($a): bool
+    public static function perfectPower($a)
     {
         return gmp_perfect_power($a);
     }
@@ -360,7 +360,7 @@ class Gmp
      * @param $a
      * @return bool
      */
-    public static function perfectSquare($a): bool
+    public static function perfectSquare($a)
     {
         return gmp_perfect_square($a);
     }
@@ -370,7 +370,7 @@ class Gmp
      * @param $a
      * @return int
      */
-    public static function popcount($a): int
+    public static function popcount($a)
     {
         return gmp_popcount($a);
     }
@@ -381,7 +381,7 @@ class Gmp
      * @param $exp
      * @return GMP_
      */
-    public static function pow($base, $exp): GMP_
+    public static function pow($base, $exp)
     {
         return gmp_pow($base, $exp);
     }
@@ -393,7 +393,7 @@ class Gmp
      * @param $mod
      * @return GMP_
      */
-    public static function powm($base, $exp, $mod): GMP_
+    public static function powm($base, $exp, $mod)
     {
         return gmp_powm($base, $exp, $mod);
     }
@@ -404,7 +404,7 @@ class Gmp
      * @param int $reps
      * @return int
      */
-    public static function probPrime($a, int $reps = 10): int
+    public static function probPrime($a, $reps = 10)
     {
         return gmp_prob_prime($a, $reps);
     }
@@ -414,7 +414,7 @@ class Gmp
      * @param $bits
      * @return GMP_
      */
-    public static function randomBits($bits): GMP_
+    public static function randomBits($bits)
     {
         return gmp_random_bits($bits);
     }
@@ -425,7 +425,7 @@ class Gmp
      * @param $max
      * @return GMP_
      */
-    public static function randomRange($min, $max): GMP_
+    public static function randomRange($min, $max)
     {
         return gmp_random_range($min, $max);
     }
@@ -446,7 +446,7 @@ class Gmp
      * @return GMP_
      * @deprecated 该方法自PHP7.2后被移除，不鼓励使用该方法
      */
-    public static function random(int $limiter = 20): GMP_
+    public static function random($limiter = 20)
     {
         return gmp_random($limiter);
     }
@@ -457,7 +457,7 @@ class Gmp
      * @param $nth
      * @return GMP_
      */
-    public static function root($a, $nth): GMP_
+    public static function root($a, $nth)
     {
         return gmp_root($a, $nth);
     }
@@ -468,7 +468,7 @@ class Gmp
      * @param    $nth
      * @return array
      */
-    public static function rootrem(GMP_ $a, $nth): array
+    public static function rootrem(GMP_ $a, $nth)
     {
         return gmp_rootrem($a, $nth);
     }
@@ -479,7 +479,7 @@ class Gmp
      * @param $start
      * @return int
      */
-    public static function scan0($a, $start): int
+    public static function scan0($a, $start)
     {
         return gmp_scan0($a, $start);
     }
@@ -490,7 +490,7 @@ class Gmp
      * @param $start
      * @return int
      */
-    public static function scan1($a, $start): int
+    public static function scan1($a, $start)
     {
         return gmp_scan1($a, $start);
     }
@@ -501,7 +501,7 @@ class Gmp
      * @param      $index
      * @param bool $set_clear
      */
-    public static function setbit(&$a, $index, bool $set_clear = true)
+    public static function setbit(&$a, $index, $set_clear = true)
     {
         return gmp_setbit($a, $index, $set_clear);
     }
@@ -511,7 +511,7 @@ class Gmp
      * @param $a
      * @return int
      */
-    public static function sign($a): int
+    public static function sign($a)
     {
         return gmp_sign($a);
     }
@@ -521,7 +521,7 @@ class Gmp
      * @param $a
      * @return GMP_
      */
-    public static function sqrt($a): GMP_
+    public static function sqrt($a)
     {
         return gmp_sqrt($a);
     }
@@ -531,7 +531,7 @@ class Gmp
      * @param $a
      * @return array
      */
-    public static function sqrtrem($a): array
+    public static function sqrtrem($a)
     {
         return gmp_sqrtrem($a);
     }
@@ -542,7 +542,7 @@ class Gmp
      * @param int $base
      * @return string
      */
-    public static function strval($gmpnumber, int $base = 10): string
+    public static function strval($gmpnumber, $base = 10)
     {
         return gmp_strval($gmpnumber, $base);
     }
@@ -553,7 +553,7 @@ class Gmp
      * @param $b
      * @return GMP_
      */
-    public static function sub($a, $b): GMP_
+    public static function sub($a, $b)
     {
         return gmp_sub($a, $b);
     }
@@ -564,7 +564,7 @@ class Gmp
      * @param $index
      * @return bool
      */
-    public static function testbit($a, $index): bool
+    public static function testbit($a, $index)
     {
         return gmp_testbit($a, $index);
     }
@@ -575,7 +575,7 @@ class Gmp
      * @param $b
      * @return GMP_
      */
-    public static function xor($a, $b): GMP_
+    public static function xor($a, $b)
     {
         return gmp_xor($a, $b);
     }
