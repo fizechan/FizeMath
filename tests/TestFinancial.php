@@ -20,7 +20,7 @@ class TestFinancial extends TestCase
         self::assertIsFloat($pv);
     }
 
-    public function testNpv()
+    public function testNpv2()
     {
         $values = [];
         $values[] = -1180000.00;
@@ -31,6 +31,20 @@ class TestFinancial extends TestCase
         $npv = Financial::npv(0.05 / 12, $values);
         var_dump($npv);
         self::assertIsFloat($npv);
+    }
+
+    public function testNpv()
+    {
+        $values = [];
+        for ($i = 0; $i <= 21; $i++) {
+            $values[] = 3000 + $i;
+        }
+        $ret = Financial::npv(0.003875, $values);
+        var_dump($ret);
+        $ret = round($ret,2);
+//        var_dump($values);
+        var_dump($ret);
+        self::assertEquals($ret, 63365.63 );
     }
 
     public function testPmt()
@@ -72,61 +86,25 @@ class TestFinancial extends TestCase
 
     public function testIrr()
     {
-//        $values = [];
-//        $values[] = -800000.00;
-//        for ($i = 0; $i < 10; $i++) {
-//            $values[] = 77895.00;
-//        }
-//        $values[] = 55790.00;
-//        $values[] = 100.00;
-//        self::assertCount(13, $values);
-//        $npv = Financial::npv(0.1, $values);
-//        var_dump($npv);
-//        self::assertIsFloat($npv);
-//
-//        $values = [];
-//        $values[] = 0.00;
-//        for ($i = 0; $i < 10; $i++) {
-//            $values[] = 77895.00;
-//        }
-//        $values[] = 55790.00;
-//        $values[] = 100.00;
-//        self::assertCount(13, $values);
-//        $npv = Financial::npv(0.1, $values);
-//        var_dump($npv);
-//        self::assertIsFloat($npv);
-//
-//        $values = [];
-//        $values[] = -800000.00;
-//        for ($i = 0; $i < 10; $i++) {
-//            $values[] = 77895.00;
-//        }
-//        $values[] = 55790.00;
-//        $values[] = 100.00;
-//        self::assertCount(13, $values);
-//        $irr = Financial::irr($values);
-//        var_dump($irr);
-//        self::assertIsFloat($irr);
-//
-//        $values = [
-//            -800000.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            77895.00,
-//            55790.00,
-//            100
-//        ];
-//        self::assertCount(13, $values);
-//        $irr = Financial::irr($values);
-//        var_dump($irr);
-//        self::assertIsFloat($irr);
+        $values = [
+            -800000.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            77895.00,
+            55790.00,
+            100
+        ];
+        self::assertCount(13, $values);
+        $irr = Financial::irr($values);
+        var_dump($irr);
+        self::assertIsFloat($irr);
 
         $values = [
             -77250.00,
