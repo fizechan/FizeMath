@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace fize\math;
 
@@ -465,7 +465,7 @@ class Gmp
     /**
      * 取n次根的整数部分和余数
      * @param GMP_ $a
-     * @param    $nth
+     * @param      $nth
      * @return array
      */
     public static function rootrem(GMP_ $a, $nth): array
@@ -538,8 +538,8 @@ class Gmp
 
     /**
      * 将数值转化为字符串
-     * @param     $gmpnumber
-     * @param int $base
+     * @param GMP_|string|int $gmpnumber 数值
+     * @param int             $base      进制
      * @return string
      */
     public static function strval($gmpnumber, int $base = 10): string

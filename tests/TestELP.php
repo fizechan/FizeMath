@@ -1,6 +1,5 @@
 <?php
 
-
 use fize\math\ELP;
 use PHPUnit\Framework\TestCase;
 

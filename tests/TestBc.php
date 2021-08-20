@@ -1,6 +1,5 @@
 <?php
 
-
 use fize\math\Bc;
 use PHPUnit\Framework\TestCase;
 

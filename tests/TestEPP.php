@@ -1,6 +1,5 @@
 <?php
 
-
 use fize\math\EPP;
 use PHPUnit\Framework\TestCase;
 

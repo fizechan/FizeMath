@@ -1,6 +1,5 @@
 <?php
 
-
 use fize\math\Financial;
 use PHPUnit\Framework\TestCase;
 
