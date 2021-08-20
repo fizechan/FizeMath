@@ -7,7 +7,7 @@ use GMP as GMP_;
 /**
  * GMP数学扩展
  */
-class Gmp
+class GMP
 {
 
     /**

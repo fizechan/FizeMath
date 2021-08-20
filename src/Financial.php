@@ -321,9 +321,9 @@ class Financial
                     $guess -= $step;
                     $last_sub_Guess = $guess;
                 }
-                $dist = abs((float)Bc::sub($last_add_Guess, $last_sub_Guess, $precise + 2));
+                $dist = abs((float)BC::sub($last_add_Guess, $last_sub_Guess, $precise + 2));
                 $dist = number_format($dist, $precise + 2);
-                $step = (float)Bc::div($dist, 2, $precise + 2);
+                $step = (float)BC::div($dist, 2, $precise + 2);
             }
         }
         if ($step != 0 && abs($residual) > $epsilon) {

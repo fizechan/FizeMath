@@ -1,22 +1,31 @@
 <?php
 
 
-use fize\math\Gmp;
+use fize\math\GMP;
 use PHPUnit\Framework\TestCase;
 
-class TestGmp extends TestCase
+class TestGMP extends TestCase
 {
 
     public function testAbs()
     {
-        $a = Gmp::abs('-123');
+        $a = GMP::abs('-123');
         var_dump($a);
-        $as = Gmp::strval($a);
+        $as = GMP::strval($a);
         var_dump($as);
         self::assertEquals('123', $as);
     }
 
     public function testAdd()
+    {
+        $a = GMP::add('123', '321');
+        var_dump($a);
+        $as = GMP::strval($a);
+        var_dump($as);
+        self::assertEquals('444', $as);
+    }
+
+    public function testAnd()
     {
 
     }
@@ -210,10 +219,7 @@ class TestGmp extends TestCase
 
     }
 
-    public function testAnd()
-    {
 
-    }
 
     public function testScan0()
     {
