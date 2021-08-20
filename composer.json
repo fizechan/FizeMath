@@ -21,6 +21,7 @@
     "phpunit/phpunit": "^9.5.0"
   },
   "suggest": {
+    "php": ">=7.3.0",
     "ext-bcmath": "*",
     "ext-gmp": "*"
   }
