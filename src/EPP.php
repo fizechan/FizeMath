@@ -1,9 +1,9 @@
 <?php
 
 
-namespace fize\math;
+namespace Fize\Math;
 
-use fize\datetime\Date;
+use Fize\Datetime\Date;
 
 /**
  * 等额本金

@@ -1,7 +1,8 @@
 <?php
 
+namespace Tests;
 
-use fize\math\Money;
+use Fize\Math\Money;
 use PHPUnit\Framework\TestCase;
 
 class TestMoney extends TestCase

@@ -1,6 +1,8 @@
 <?php
 
-use fize\math\EPP;
+namespace Tests;
+
+use Fize\Math\EPP;
 use PHPUnit\Framework\TestCase;
 
 class TestEPP extends TestCase

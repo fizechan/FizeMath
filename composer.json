@@ -10,19 +10,24 @@
   ],
   "autoload": {
     "psr-4": {
-      "fize\\math\\": "src"
+      "Fize\\Math\\": "src"
     }
   },
   "require": {
     "php": ">=7.0.0",
-    "fize/datetime": "^2.2.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^9.5.0"
+    "fize/datetime": "^3.0.0"
   },
   "suggest": {
     "php": ">=7.3.0",
     "ext-bcmath": "*",
     "ext-gmp": "*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5.0"
   }
 }

@@ -1,6 +1,6 @@
-<?php /** @noinspection PhpComposerExtensionStubsInspection */
+<?php
 
-namespace fize\math;
+namespace Fize\Math;
 
 use GMP as GMP_;
 

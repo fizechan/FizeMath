@@ -1,6 +1,8 @@
 <?php
 
-use fize\math\ELP;
+namespace Tests;
+
+use Fize\Math\ELP;
 use PHPUnit\Framework\TestCase;
 
 class TestELP extends TestCase

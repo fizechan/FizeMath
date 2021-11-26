@@ -1,7 +1,7 @@
 <?php
 
 
-namespace fize\math;
+namespace Fize\Math;
 
 use DateTime;
 use Exception;
@@ -155,7 +155,7 @@ class Financial
             $oldNpv = self::npv($oldRate, $values);
             $derivValue = self::firstDeriv($oldRate, $values);
             if ($derivValue == 0) {
-                continue;
+                throw new RuntimeException('IRR cannot be calculated: unreasonable parameters!');
             }
             $epsRate = $oldNpv / $derivValue;
             $newRate = $oldRate - $epsRate;

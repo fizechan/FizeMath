@@ -1,6 +1,8 @@
 <?php
 
-use fize\math\BC;
+namespace Tests;
+
+use Fize\Math\BC;
 use PHPUnit\Framework\TestCase;
 
 class TestBC extends TestCase

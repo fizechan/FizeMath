@@ -1,6 +1,8 @@
 <?php
 
-use fize\math\Financial;
+namespace Tests;
+
+use Fize\Math\Financial;
 use PHPUnit\Framework\TestCase;
 
 class TestFinancial extends TestCase
@@ -44,7 +46,7 @@ class TestFinancial extends TestCase
         $ret = round($ret,2);
 //        var_dump($values);
         var_dump($ret);
-        self::assertEquals($ret, 63365.63 );
+        self::assertEquals(63365.63, $ret);
     }
 
     public function testPmt()

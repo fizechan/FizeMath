@@ -1,10 +1,8 @@
 <?php
 
+namespace Fize\Math;
 
-namespace fize\math;
-
-
-use fize\datetime\Date;
+use Fize\Datetime\Date;
 
 /**
  * 等额本息

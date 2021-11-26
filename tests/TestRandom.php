@@ -1,7 +1,8 @@
 <?php
 
+namespace Tests;
 
-use fize\math\Random;
+use Fize\Math\Random;
 use PHPUnit\Framework\TestCase;
 
 class TestRandom extends TestCase

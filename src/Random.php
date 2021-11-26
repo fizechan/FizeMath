@@ -1,6 +1,6 @@
 <?php
 
-namespace fize\math;
+namespace Fize\Math;
 
 /**
  * 随机数生成

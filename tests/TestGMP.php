@@ -1,7 +1,8 @@
 <?php
 
+namespace Tests;
 
-use fize\math\GMP;
+use Fize\Math\GMP;
 use PHPUnit\Framework\TestCase;
 
 class TestGMP extends TestCase
