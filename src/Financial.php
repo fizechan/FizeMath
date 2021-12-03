@@ -205,6 +205,47 @@ class Financial
     }
 
     /**
+     * 内部收益率
+     * @param array $values  现金流
+     * @param float $guess   估计值
+     * @param int   $precise 精确小数位
+     * @param int   $maxiter 尝试次数
+     * @return float
+     */
+    public static function irr2(array $values, float $guess = 0.1, int $precise = 7, int $maxiter = 10000): float
+    {
+        if (!self::hasPN($values)) {
+            throw new RuntimeException('IRR cannot be calculated: cash flow error!');
+        }
+        $last_add_Guess = $guess;
+        $last_sub_Guess = $guess;
+        $residual = 1;
+        $step = 0.05;
+        $epsilon = pow(10, -$precise);
+        while (abs($residual) > $epsilon && $maxiter > 0) {
+            $maxiter -= 1;
+            $residual = self::npv($guess, $values);
+            if (abs($residual) > $epsilon) {
+                if ($residual > 0) {
+                    $guess += $step;
+                    $last_add_Guess = $guess;
+                } else {
+                    $guess -= $step;
+                    $last_sub_Guess = $guess;
+                }
+                $dist = abs((float)BC::sub($last_add_Guess, $last_sub_Guess, $precise + 2));
+                $dist = number_format($dist, $precise + 2, '.', '');
+                $step = (float)BC::div($dist, 2, $precise + 2);
+            }
+        }
+        if ($step != 0 && abs($residual) > $epsilon) {
+            throw new RuntimeException('IRR cannot be calculated: out of calculation times!');
+        }
+        return $guess;
+    }
+
+
+    /**
      * 修正的内部收益率
      * @param array $values        现金流
      * @param float $finance_rate  资金支付的利率
@@ -322,7 +363,7 @@ class Financial
                     $last_sub_Guess = $guess;
                 }
                 $dist = abs((float)BC::sub($last_add_Guess, $last_sub_Guess, $precise + 2));
-                $dist = number_format($dist, $precise + 2);
+                $dist = number_format($dist, $precise + 2, '.', '');
                 $step = (float)BC::div($dist, 2, $precise + 2);
             }
         }
