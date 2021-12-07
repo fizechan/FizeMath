@@ -57,7 +57,7 @@ class TestEPP extends TestCase
 
     public function testPlans()
     {
-        $epp = new EPP(1180000.00, 0.05, 360);
+        $epp = new EPP(1180000.00, 0.0525, 360);
         $plans = $epp->plans();
         var_export($plans);
         self::assertIsArray($plans);

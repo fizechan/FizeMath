@@ -4,6 +4,7 @@ namespace Fize\Math;
 
 /**
  * 随机数生成
+ * @todo 非数学范畴、待转移到其他包。
  */
 class Random
 {

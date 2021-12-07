@@ -10,7 +10,7 @@ class TestELP extends TestCase
 
     public function test__construct()
     {
-        $elp = new ELP(1180000.00, 0.05, 360);
+        $elp = new ELP(1180000.00, 0.0525, 360);
         var_dump($elp);
         self::assertIsObject($elp);
     }
@@ -57,7 +57,7 @@ class TestELP extends TestCase
 
     public function testPlans()
     {
-        $elp = new ELP(1180000.00, 0.05, 360);
+        $elp = new ELP(1180000.00, 0.0525, 360);
         $plans = $elp->plans();
         var_export($plans);
         self::assertIsArray($plans);

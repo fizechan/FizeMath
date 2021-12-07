@@ -14,8 +14,8 @@
     }
   },
   "require": {
-    "php": ">=7.0.0",
-    "fize/datetime": "^3.0.0"
+    "php": ">=7.1.0",
+    "fize/datetime": "^4.0.0"
   },
   "suggest": {
     "php": ">=7.3.0",
