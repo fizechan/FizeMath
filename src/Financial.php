@@ -22,7 +22,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function fv(float $rate, int $nper, float $pmt, float $pv, int $type = 0)
+    public static function fv(float $rate, int $nper, float $pmt, float $pv, int $type = 0): float
     {
         $temp = pow(1 + $rate, $nper);
         if ($rate == 0) {
@@ -42,7 +42,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function pv(float $rate, int $nper, float $pmt, float $fv = 0, int $type = 0)
+    public static function pv(float $rate, int $nper, float $pmt, float $fv = 0, int $type = 0): float
     {
         $temp = pow(1 + $rate, $nper);
         if ($rate == 0) {
@@ -59,7 +59,7 @@ class Financial
      * @param array $values 现金流
      * @return float
      */
-    public static function npv(float $rate, array $values)
+    public static function npv(float $rate, array $values): float
     {
         $npv = 0;
         foreach ($values as $k => $v) {
@@ -79,7 +79,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function pmt(float $rate, int $nper, float $pv, float $fv = 0, int $type = 0)
+    public static function pmt(float $rate, int $nper, float $pv, float $fv = 0, int $type = 0): float
     {
         $temp = pow(1 + $rate, $nper);
         $mask = $rate == 0;
@@ -102,7 +102,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function ppmt(float $rate, int $per, int $nper, float $pv, float $fv = 0, int $type = 0)
+    public static function ppmt(float $rate, int $per, int $nper, float $pv, float $fv = 0, int $type = 0): float
     {
         $total = self::pmt($rate, $nper, $pv, $fv, $type);
         return $total - self::ipmt($rate, $per, $nper, $pv, $fv, $type);
@@ -118,7 +118,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function ipmt(float $rate, int $per, int $nper, float $pv, float $fv = 0, int $type = 0)
+    public static function ipmt(float $rate, int $per, int $nper, float $pv, float $fv = 0, int $type = 0): float
     {
         $total_pmt = self::pmt($rate, $nper, $pv, $fv, $type);
         $ipmt = self::fv($rate, $per - 1, $total_pmt, $pv, $type) * $rate;
@@ -252,7 +252,7 @@ class Financial
      * @param float $reinvest_rate 再投资的收益率
      * @return float
      */
-    public static function mirr(array $values, float $finance_rate, float $reinvest_rate)
+    public static function mirr(array $values, float $finance_rate, float $reinvest_rate): float
     {
         $n = count($values);
         $npvp = self::npv($reinvest_rate, self::positiveValues($values));
@@ -269,7 +269,7 @@ class Financial
      * @param int   $type 0-期末支付；1期初支付
      * @return float
      */
-    public static function nper(float $rate, float $pmt, float $pv, float $fv = 0, int $type = 0)
+    public static function nper(float $rate, float $pmt, float $pv, float $fv = 0, int $type = 0): float
     {
         try {
             $z = $pmt * (1 + $rate * $type) / $rate;
@@ -293,7 +293,7 @@ class Financial
      * @param int   $maxiter 尝试次数
      * @return float
      */
-    public static function rate(int $nper, float $pmt, float $pv, float $fv = 0, int $type = 0, float $guess = 0.1, int $precise = 8, int $maxiter = 10000)
+    public static function rate(int $nper, float $pmt, float $pv, float $fv = 0, int $type = 0, float $guess = 0.1, int $precise = 8, int $maxiter = 10000): float
     {
         $tol = pow(10, -$precise);  // 误差
         $rn = $guess;
@@ -320,7 +320,7 @@ class Financial
      * @param array $dates  日期表
      * @return float
      */
-    public static function xnpv(float $rate, array $values, array $dates)
+    public static function xnpv(float $rate, array $values, array $dates): float
     {
         $xnpv = 0;
         $d0 = new DateTime($dates[0]);
@@ -402,7 +402,7 @@ class Financial
      * @param array $values 现金流
      * @return float
      */
-    protected static function firstDeriv(float $rate, array $values)
+    protected static function firstDeriv(float $rate, array $values): float
     {
         $result = 0;
         foreach ($values as $k => $v) {
@@ -462,7 +462,7 @@ class Financial
      * @param $w
      * @return float
      */
-    protected static function gDIVgp($r, $n, $p, $x, $y, $w)
+    protected static function gDIVgp($r, $n, $p, $x, $y, $w): float
     {
         $t1 = pow($r + 1, $n);
         $t2 = pow($r + 1, $n - 1);

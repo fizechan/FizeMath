@@ -20,17 +20,17 @@ class BC
 
     /**
      * 返回2个任意精度数字的加法计算，返回字符串结果
-     * @param float|int|string $left_operand  第一个数字
-     * @param float|int|string $right_operand 第二个数字
-     * @param int|null         $scale         指定结果小数位，默认是自动
+     * @param float|int|string $leftOperand  第一个数字
+     * @param float|int|string $rightOperand 第二个数字
+     * @param int|null         $scale        指定结果小数位，默认是自动
      * @return string
      */
-    public static function add($left_operand, $right_operand, int $scale = null): string
+    public static function add($leftOperand, $rightOperand, int $scale = null): string
     {
         if (is_null($scale)) {
-            return bcadd((string)$left_operand, (string)$right_operand);
+            return bcadd((string)$leftOperand, (string)$rightOperand);
         } else {
-            return bcadd((string)$left_operand, (string)$right_operand, $scale);
+            return bcadd((string)$leftOperand, (string)$rightOperand, $scale);
         }
     }
 
@@ -51,74 +51,74 @@ class BC
 
     /**
      * 把right_operand和left_operand作比较, 并且返回一个整数的结果.
-     * @param float|int|string $left_operand  左边的运算数
-     * @param float|int|string $right_operand 右边的运算数
-     * @param int|null         $scale         设置指示数字， 在使用来作比较的小数点部分. 默认比较全部
+     * @param float|int|string $leftOperand  左边的运算数
+     * @param float|int|string $rightOperand 右边的运算数
+     * @param int|null         $scale        设置指示数字， 在使用来作比较的小数点部分. 默认比较全部
      * @return int 如果两个数相等返回0, 左边的数left_operand比较右边的数right_operand大返回1, 否则返回-1.
      */
-    public static function comp($left_operand, $right_operand, int $scale = null): int
+    public static function comp($leftOperand, $rightOperand, int $scale = null): int
     {
         if (is_null($scale)) {
-            return bccomp((string)$left_operand, (string)$right_operand);
+            return bccomp((string)$leftOperand, (string)$rightOperand);
         } else {
-            return bccomp((string)$left_operand, (string)$right_operand, $scale);
+            return bccomp((string)$leftOperand, (string)$rightOperand, $scale);
         }
     }
 
     /**
      * 2个任意精度的数字除法计算
-     * @param float|int|string $left_operand  被除数
-     * @param float|int|string $right_operand 除数
-     * @param int|null         $scale         指定结果小数位，默认是自动
+     * @param float|int|string $leftOperand  被除数
+     * @param float|int|string $rightOperand 除数
+     * @param int|null         $scale        指定结果小数位，默认是自动
      * @return string 返回结果为字符串类型的结果，如果右操作数是0结果为null
      */
-    public static function div($left_operand, $right_operand, int $scale = null): string
+    public static function div($leftOperand, $rightOperand, int $scale = null): string
     {
         if (is_null($scale)) {
-            return bcdiv((string)$left_operand, (string)$right_operand);
+            return bcdiv((string)$leftOperand, (string)$rightOperand);
         } else {
-            return bcdiv((string)$left_operand, (string)$right_operand, $scale);
+            return bcdiv((string)$leftOperand, (string)$rightOperand, $scale);
         }
     }
 
     /**
      * 多个任意精度的数字除法计算
-     * @param float|int|string $left_operand   被除数
-     * @param array            $right_operands 除数组成的数组
-     * @param int|null         $scale          指定结果小数位，默认是自动
+     * @param float|int|string $leftOperand   被除数
+     * @param array            $rightOperands 除数组成的数组
+     * @param int|null         $scale         指定结果小数位，默认是自动
      * @return string 返回结果为字符串类型的结果，如果右操作数是0结果为null
      */
-    public static function divs($left_operand, array $right_operands, int $scale = null): string
+    public static function divs($leftOperand, array $rightOperands, int $scale = null): string
     {
-        $right_operand = self::muls($right_operands, $scale);
-        return self::div($left_operand, $right_operand, $scale);
+        $rightOperand = self::muls($rightOperands, $scale);
+        return self::div($leftOperand, $rightOperand, $scale);
     }
 
     /**
      * 对一个任意精度数字取模
-     * @param float|int|string $left_operand 左操作数
-     * @param float|int|string $modulus      系数
+     * @param float|int|string $leftOperand 左操作数
+     * @param float|int|string $modulus     系数
      * @return string 返回字符串类型取模后结果，如果系数为0则返回null
      * @since PHP7.2
      */
-    public static function mod($left_operand, $modulus): string
+    public static function mod($leftOperand, $modulus): string
     {
-        return bcmod((string)$left_operand, (string)$modulus);
+        return bcmod((string)$leftOperand, (string)$modulus);
     }
 
     /**
      * 2个任意精度数字乘法计算
-     * @param float|int|string $left_operand  左操作数
-     * @param float|int|string $right_operand 右操作数
-     * @param int|null         $scale         设置结果中小数点后的小数位数
+     * @param float|int|string $leftOperand  左操作数
+     * @param float|int|string $rightOperand 右操作数
+     * @param int|null         $scale        设置结果中小数点后的小数位数
      * @return string 返回计算结果字符串
      */
-    public static function mul($left_operand, $right_operand, int $scale = null): string
+    public static function mul($leftOperand, $rightOperand, int $scale = null): string
     {
         if (is_null($scale)) {
-            return bcmul((string)$left_operand, (string)$right_operand);
+            return bcmul((string)$leftOperand, (string)$rightOperand);
         } else {
-            return bcmul((string)$left_operand, (string)$right_operand, $scale);
+            return bcmul((string)$leftOperand, (string)$rightOperand, $scale);
         }
     }
 
@@ -139,34 +139,34 @@ class BC
 
     /**
      * 任意精度数字的乘方
-     * @param float|int|string $left_operand  底数
-     * @param int|string       $right_operand 乘方
+     * @param float|int|string $leftOperand  底数
+     * @param int|string       $rightOperand 乘方
      * @param int|null         $scale         设置结果中小数点后的小数位数
      * @return string
      */
-    public static function pow($left_operand, $right_operand, int $scale = null): string
+    public static function pow($leftOperand, $rightOperand, int $scale = null): string
     {
         if (is_null($scale)) {
-            return bcpow((string)$left_operand, (string)$right_operand);
+            return bcpow((string)$leftOperand, (string)$rightOperand);
         } else {
-            return bcpow((string)$left_operand, (string)$right_operand, $scale);
+            return bcpow((string)$leftOperand, (string)$rightOperand, $scale);
         }
     }
 
     /**
      * 对乘方结果进行取模
-     * @param float|int|string $left_operand  底数
-     * @param int|string       $right_operand 乘方
+     * @param float|int|string $leftOperand  底数
+     * @param int|string       $rightOperand 乘方
      * @param float|int|string $modulus       模
      * @param int|null         $scale         设置结果中小数点后的小数位数
      * @return string
      */
-    public static function powmod($left_operand, $right_operand, $modulus, int $scale = null): string
+    public static function powmod($leftOperand, $rightOperand, $modulus, int $scale = null): string
     {
         if (is_null($scale)) {
-            return bcpowmod((string)$left_operand, (string)$right_operand, (string)$modulus);
+            return bcpowmod((string)$leftOperand, (string)$rightOperand, (string)$modulus);
         } else {
-            return bcpowmod((string)$left_operand, (string)$right_operand, (string)$modulus, $scale);
+            return bcpowmod((string)$leftOperand, (string)$rightOperand, (string)$modulus, $scale);
         }
     }
 
@@ -197,30 +197,30 @@ class BC
 
     /**
      * 2个任意精度数字的减法
-     * @param float|int|string $left_operand  被减数
-     * @param float|int|string $right_operand 减数
+     * @param float|int|string $leftOperand  被减数
+     * @param float|int|string $rightOperand 减数
      * @param int|null         $scale         设置结果中小数点后的小数位数
      * @return string
      */
-    public static function sub($left_operand, $right_operand, int $scale = null): string
+    public static function sub($leftOperand, $rightOperand, int $scale = null): string
     {
         if (is_null($scale)) {
-            return bcsub((string)$left_operand, (string)$right_operand);
+            return bcsub((string)$leftOperand, (string)$rightOperand);
         } else {
-            return bcsub((string)$left_operand, (string)$right_operand, $scale);
+            return bcsub((string)$leftOperand, (string)$rightOperand, $scale);
         }
     }
 
     /**
      * 任意个任意精度数字的减法
-     * @param float|int|string $left_operand   被减数
+     * @param float|int|string $leftOperand   被减数
      * @param array            $right_operands 减数组成的数组
      * @param int|null         $scale          设置结果中小数点后的小数位数
      * @return string
      */
-    public static function subs($left_operand, array $right_operands, int $scale = null): string
+    public static function subs($leftOperand, array $right_operands, int $scale = null): string
     {
-        $right_operand = self::adds($right_operands, $scale);
-        return self::sub($left_operand, $right_operand, $scale);
+        $rightOperand = self::adds($right_operands, $scale);
+        return self::sub($leftOperand, $rightOperand, $scale);
     }
 }
