@@ -7,6 +7,7 @@ use Fize\Datetime\Date;
 
 /**
  * 等额本金
+ * @todo 不使用FizeDatetime
  */
 class EPP
 {
