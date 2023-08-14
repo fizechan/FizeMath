@@ -6,7 +6,6 @@ use Fize\Datetime\Date;
 
 /**
  * 等额本息
- * @todo 不使用FizeDatetime
  */
 class ELP
 {
